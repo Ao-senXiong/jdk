@@ -26,6 +26,7 @@
 package java.util;
 
 import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
 import org.checkerframework.checker.nonempty.qual.EnsuresNonEmptyIf;
@@ -499,7 +500,7 @@ public class Hashtable<K extends @NonNull Object,V extends @NonNull Object>
      * @see     #get(Object)
      */
     @EnsuresKeyFor(value={"#1"}, map={"this"})
-    public synchronized @Nullable V put(@GuardSatisfied Hashtable<K, V> this, K key, V value) {
+    public synchronized @Nullable V put(@GuardSatisfied @UnknownInitialization Hashtable<K, V> this, K key, V value) {
         // Make sure the value is not null
         if (value == null) {
             throw new NullPointerException();
@@ -564,7 +565,7 @@ public class Hashtable<K extends @NonNull Object,V extends @NonNull Object>
      * @throws NullPointerException if the specified map is null
      * @since 1.2
      */
-    public synchronized void putAll(@GuardSatisfied Hashtable<K, V> this, Map<? extends K, ? extends V> t) {
+    public synchronized void putAll(@GuardSatisfied @UnknownInitialization Hashtable<K, V> this, Map<? extends K, ? extends V> t) {
         for (Map.Entry<? extends K, ? extends V> e : t.entrySet())
             put(e.getKey(), e.getValue());
     }

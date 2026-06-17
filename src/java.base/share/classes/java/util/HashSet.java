@@ -26,6 +26,7 @@
 package java.util;
 
 import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
 import org.checkerframework.checker.nonempty.qual.EnsuresNonEmptyIf;
@@ -238,7 +239,7 @@ public class HashSet<E>
      * element
      */
     @EnsuresNonEmpty("this")
-    public boolean add(@GuardSatisfied HashSet<E> this, E e) {
+    public boolean add(@GuardSatisfied @UnknownInitialization HashSet<E> this, E e) {
         return map.put(e, PRESENT)==null;
     }
 
